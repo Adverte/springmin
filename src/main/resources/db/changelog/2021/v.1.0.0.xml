@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="v1.0.0-ou-1" author="Oleg Ushakov">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <not>
+                    <tableExists tableName="user"/>
+                </not>
+            </and>
+        </preConditions>
+        <comment>Add user table</comment>
+        <sql>
+            create table user(
+            id integer UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            name VARCHAR(64) NOT NULL,
+            surname VARCHAR(64) NOT NULL,
+            wage decimal(12,2) NOT NULL,
+            event_time datetime NOT NULL
+            ) ;
+            create index user_id_index
+            on user (id);
+
+            create index user_name_index
+            on user (name);
+
+            create index user_surname_index
+            on user (surname);
+        </sql>
+    </changeSet>
+</databaseChangeLog>
